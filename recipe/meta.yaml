@@ -16,7 +16,7 @@ build:
   skip: True  # [not linux]
   skip: True  # [cuda_compiler_version == "None"]
   skip: True  # [cuda_compiler_version == "11.2"]
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
