@@ -20,6 +20,8 @@ build:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
     - '*libcuda.so*'
+    - '*libcudart.so*'
+    - '*libnvidia-ml.so*'
   ignore_run_exports_from:
     # CXX standard library is unused
     - {{ compiler('cxx') }}
