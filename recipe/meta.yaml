@@ -39,7 +39,7 @@ requirements:
     - libtool
     - make
   host:
-    - ucx
+    - ucx >=1.16
     - cuda-version {{ cuda_compiler_version }}
     - cudatoolkit      # [(cuda_compiler_version or "None").startswith("11")]
     - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
