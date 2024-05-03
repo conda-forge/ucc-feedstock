@@ -26,6 +26,7 @@ build:
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
     - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-nvml-dev            # [(cuda_compiler_version or "None").startswith("12")]
 
 requirements:
   build:
@@ -39,6 +40,7 @@ requirements:
   host:
     - ucx
     - cuda-version {{ cuda_compiler_version }}
+    - cudatoolkit      # [(cuda_compiler_version or "None").startswith("11")]
     - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
