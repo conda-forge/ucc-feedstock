@@ -14,16 +14,20 @@ source:
 
 build:
   skip: True  # [not linux]
-  skip: True  # [cuda_compiler_version == "None"]
-  skip: True  # [cuda_compiler_version == "11.2"]
-  number: 0
+  skip: True  # [cuda_compiler_version not in ("11.8", "12.0")]
+  number: 1
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
     - '*libcuda.so*'
+    - '*libcudart.so*'
+    - '*libnvidia-ml.so*'
   ignore_run_exports_from:
     # CXX standard library is unused
     - {{ compiler('cxx') }}
+    # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
+    - {{ compiler("cuda") }}
+    - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
 
 requirements:
   build:
@@ -37,9 +41,13 @@ requirements:
   host:
     - ucx
     - cuda-version {{ cuda_compiler_version }}
+    - cudatoolkit      # [(cuda_compiler_version or "None").startswith("11")]
     - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-nvml-dev            # [(cuda_compiler_version or "None").startswith("12")]
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
+    # since ucc depends on ucx, we let ucx handles the optional cudart dependency, and
+    # no need to add run_constrained
 
 test:
   commands:
