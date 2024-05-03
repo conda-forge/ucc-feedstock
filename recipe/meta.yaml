@@ -23,6 +23,9 @@ build:
   ignore_run_exports_from:
     # CXX standard library is unused
     - {{ compiler('cxx') }}
+    # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
+    - {{ compiler("cuda") }}
+    - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
 
 requirements:
   build:
@@ -39,6 +42,8 @@ requirements:
     - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
+    # since ucc depends on ucx, we let ucx handles the optional cudart dependency, and
+    # no need to add run_constrained
 
 test:
   commands:
