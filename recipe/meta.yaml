@@ -7,10 +7,6 @@ package:
 source:
   url: https://github.com/openucx/ucc/archive/refs/tags/v{{ version }}.tar.gz
   sha256: b56379abe5f1c125bfa83be305d78d81a64aa271b7b5fff0ac17b86725ff3acf
-  patches:
-    # Apply upstream fix for CUDA versions pre-12.2
-    # xref: https://github.com/openucx/ucc/pull/847
-    - 0001-EC-CUDA-fix-build-with-12.2-and-older-arch-847.patch
 
 build:
   skip: true  # [not linux]
