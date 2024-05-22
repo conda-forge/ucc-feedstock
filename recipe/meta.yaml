@@ -47,7 +47,7 @@ requirements:
     # since ucc depends on ucx, we let ucx handles the optional cudart dependency, and
     # no need to add run_constrained
   run_constrained:
-    - {{ pin_compatible("nccl", "max_pin"="x") }}
+    - {{ pin_compatible("nccl", max_pin="x") }}
 
 test:
   commands:
