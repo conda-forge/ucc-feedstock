@@ -11,19 +11,21 @@ source:
 build:
   skip: true  # [not linux]
   skip: true  # [cuda_compiler_version not in ("11.8", "12.0")]
-  number: 1
+  number: 2
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
     - '*libcuda.so*'
     - '*libcudart.so*'
     - '*libnvidia-ml.so*'
+    - '*libnccl.so*'
   ignore_run_exports_from:
     # CXX standard library is unused
     - {{ compiler('cxx') }}
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
     - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
+    - nccl
 
 requirements:
   build:
@@ -39,11 +41,14 @@ requirements:
     - cuda-version {{ cuda_compiler_version }}
     - cudatoolkit      # [(cuda_compiler_version or "None").startswith("11")]
     - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
-    - cuda-nvml-dev            # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-nvml-dev    # [(cuda_compiler_version or "None").startswith("12")]
+    - nccl
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
     # since ucc depends on ucx, we let ucx handles the optional cudart dependency, and
     # no need to add run_constrained
+  run_constrained:
+    - {{ pin_compatible("nccl", max_pin="x") }}
 
 test:
   commands:
@@ -64,6 +69,7 @@ test:
     - test -f $PREFIX/lib/ucc/libucc_cl_hier.so.1
     - test -f $PREFIX/lib/ucc/libucc_ec_cuda.so.1
     - test -f $PREFIX/lib/ucc/libucc_ec_cpu.so.1
+    - test -f $PREFIX/bin/.ucc-post-link.sh
 
 
 about:
