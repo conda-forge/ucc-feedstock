@@ -178,6 +178,3 @@ Feedstock Maintainers
 * [@m3vaz](https://github.com/m3vaz/)
 * [@sandeepd-nv](https://github.com/sandeepd-nv/)
 
-
-<!-- dummy commit to enable rerendering -->
-
