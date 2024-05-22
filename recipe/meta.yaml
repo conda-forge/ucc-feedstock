@@ -69,6 +69,7 @@ test:
     - test -f $PREFIX/lib/ucc/libucc_cl_hier.so.1
     - test -f $PREFIX/lib/ucc/libucc_ec_cuda.so.1
     - test -f $PREFIX/lib/ucc/libucc_ec_cpu.so.1
+    - test -f $PREFIX/bin/.ucc-post-link.sh
 
 
 about:
