@@ -10,3 +10,5 @@ make install
 # Static libraries need to be shipped separately as per https://github.com/conda-forge/cfep/blob/main/cfep-18.md
 # Deleting static libraries
 find $PREFIX/lib -type f -name "*.a" -exec rm -f {} +
+
+cp "${RECIPE_DIR}/ucc-post-link.sh" "${PREFIX}/bin/.ucc-post-link.sh"
