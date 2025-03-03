@@ -10,7 +10,7 @@ source:
 
 build:
   skip: true  # [not linux]
-  skip: true  # [cuda_compiler_version not in ("11.8", "12.8 t")]
+  skip: true  # [cuda_compiler_version not in ("11.8", "12.8")]
   number: 5
   run_exports:
     - {{ pin_subpackage("ucc") }}
