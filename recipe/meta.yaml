@@ -10,8 +10,8 @@ source:
 
 build:
   skip: true  # [not linux]
-  skip: true  # [cuda_compiler_version not in ("11.8", "12.0")]
-  number: 4
+  skip: true  # [cuda_compiler_version not in ("11.8", "12.8")]
+  number: 5
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
@@ -45,9 +45,13 @@ requirements:
     - nccl
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
-    # since ucc depends on ucx, we let ucx handles the optional cudart dependency, and
-    # no need to add run_constrained
   run_constrained:
+    - {{ pin_compatible("cuda-version", min_pin="x", max_pin="x") }}
+    # The actual version constraint comes from cuda-version, so below we explicit list
+    # them only to codify that these are expected (but optional) dependencies when CUDA
+    # is in use, otherwise the solver gets confused (conda-forge/ucc-feedstock#19).
+    - cudatoolkit                                               # [cuda_compiler == "nvcc"]
+    - cuda-cudart                                               # [cuda_compiler == "cuda-nvcc"]
     - {{ pin_compatible("nccl", max_pin="x") }}
 
 test:
