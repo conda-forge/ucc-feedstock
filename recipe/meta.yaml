@@ -11,7 +11,9 @@ source:
 build:
   skip: true  # [not linux]
   skip: true  # [cuda_compiler_version not in ("11.8", "12.9")]
-  number: 0
+  number: 1
+  ignore_run_exports_from:
+    - ucx
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
@@ -34,7 +36,6 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
     - automake
-    - autoconf !=2.72  # work around conda-forge/autoconf-feedstock#41
     - libtool
     - make
   host:
