@@ -34,7 +34,6 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
     - automake
-    - autoconf !=2.72  # work around conda-forge/autoconf-feedstock#41
     - libtool
     - make
   host:
