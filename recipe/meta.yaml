@@ -1,4 +1,4 @@
-{% set version = "1.3.0" %}
+{% set version = "1.4.4" %}
 
 package:
   name: ucc
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/openucx/ucc/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: b56379abe5f1c125bfa83be305d78d81a64aa271b7b5fff0ac17b86725ff3acf
+  sha256: e098e427c7b72b5434ae1e0da2258ab3bc271142c136b0bf4cf40ef9948b70d0
 
 build:
   skip: true  # [not linux]
-  skip: true  # [cuda_compiler_version not in ("11.8", "12.8")]
-  number: 6
+  skip: true  # [cuda_compiler_version not in ("11.8", "12.9")]
+  number: 1
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
@@ -34,6 +34,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
     - automake
+    - autoconf !=2.72  # work around conda-forge/autoconf-feedstock#41
     - libtool
     - make
   host:

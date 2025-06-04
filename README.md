@@ -39,10 +39,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.8cxx_compiler_version13</td>
+              <td>linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.9cxx_compiler_version13</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22261&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.8cxx_compiler_version13" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.9cxx_compiler_version13" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -53,10 +53,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.8cxx_compiler_version13</td>
+              <td>linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.9cxx_compiler_version13</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22261&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.8cxx_compiler_version13" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.9cxx_compiler_version13" alt="variant">
                 </a>
               </td>
             </tr>
@@ -190,5 +190,6 @@ Feedstock Maintainers
 
 * [@leofang](https://github.com/leofang/)
 * [@m3vaz](https://github.com/m3vaz/)
+* [@marcinz](https://github.com/marcinz/)
 * [@sandeepd-nv](https://github.com/sandeepd-nv/)
 
