@@ -12,6 +12,8 @@ build:
   skip: true  # [not linux]
   skip: true  # [cuda_compiler_version not in ("11.8", "12.9")]
   number: 1
+  ignore_run_exports_from:
+    - ucx
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
@@ -44,7 +46,7 @@ requirements:
     - cuda-nvml-dev    # [(cuda_compiler_version or "None").startswith("12")]
     - nccl
   run:
-    - {{ pin_compatible("ucx") }}
+    - {{ pin_compatible("ucx", max_pin="x.x.x") }}
   run_constrained:
     - {{ pin_compatible("cuda-version", min_pin="x", max_pin="x") }}
     # The actual version constraint comes from cuda-version, so below we explicit list
