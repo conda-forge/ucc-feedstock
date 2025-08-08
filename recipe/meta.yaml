@@ -10,7 +10,7 @@ source:
 
 build:
   skip: true  # [not linux]
-  skip: true  # [cuda_compiler_version not in ("11.8", "12.9")]
+  skip: true  # [cuda_compiler_version not in ("12.9")]
   number: 0
   run_exports:
     - {{ pin_subpackage("ucc") }}
@@ -40,8 +40,7 @@ requirements:
   host:
     - ucx
     - cuda-version {{ cuda_compiler_version }}
-    - cudatoolkit      # [(cuda_compiler_version or "None").startswith("11")]
-    - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
+- cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
     - cuda-nvml-dev    # [(cuda_compiler_version or "None").startswith("12")]
     - nccl
   run:
