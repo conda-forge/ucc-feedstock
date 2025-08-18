@@ -1,4 +1,4 @@
-{% set version = "1.4.4" %}
+{% set version = "1.5.0" %}
 
 package:
   name: ucc
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/openucx/ucc/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e098e427c7b72b5434ae1e0da2258ab3bc271142c136b0bf4cf40ef9948b70d0
+  sha256: 7ab61a3215616ee9a7a6f51e61cfaac9e7055a12b233aef8d4a7218d2cb3860f
 
 build:
   skip: true  # [not linux]
-  skip: true  # [cuda_compiler_version not in ("11.8", "12.9")]
-  number: 2
+  skip: true  # [(cuda_compiler_version or "None") != "12.9"]
+  number: 0
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
@@ -24,7 +24,7 @@ build:
     - {{ compiler('cxx') }}
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
-    - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
     - nccl
 
 requirements:
@@ -40,7 +40,6 @@ requirements:
   host:
     - ucx
     - cuda-version {{ cuda_compiler_version }}
-    - cudatoolkit      # [(cuda_compiler_version or "None").startswith("11")]
     - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
     - cuda-nvml-dev    # [(cuda_compiler_version or "None").startswith("12")]
     - nccl
