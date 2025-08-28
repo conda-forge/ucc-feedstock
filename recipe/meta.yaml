@@ -9,8 +9,7 @@ source:
   sha256: 7ab61a3215616ee9a7a6f51e61cfaac9e7055a12b233aef8d4a7218d2cb3860f
 
 build:
-  skip: true  # [not linux]
-  skip: true  # [(cuda_compiler_version or "None") != "12.9"]
+  skip: true  # [(not linux) or cuda_compiler_version in (undefined, "None")]
   number: 0
   run_exports:
     - {{ pin_subpackage("ucc") }}
@@ -24,7 +23,7 @@ build:
     - {{ compiler('cxx') }}
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
-    - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-cudart-dev  # [cuda_compiler == "cuda-nvcc"]
     - nccl
 
 requirements:
@@ -40,8 +39,8 @@ requirements:
   host:
     - ucx
     - cuda-version {{ cuda_compiler_version }}
-    - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
-    - cuda-nvml-dev    # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-cudart-dev  # [cuda_compiler == "cuda-nvcc"]
+    - cuda-nvml-dev    # [cuda_compiler == "cuda-nvcc"]
     - nccl
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
@@ -50,7 +49,6 @@ requirements:
     # The actual version constraint comes from cuda-version, so below we explicit list
     # them only to codify that these are expected (but optional) dependencies when CUDA
     # is in use, otherwise the solver gets confused (conda-forge/ucc-feedstock#19).
-    - cudatoolkit                                               # [cuda_compiler == "nvcc"]
     - cuda-cudart                                               # [cuda_compiler == "cuda-nvcc"]
     - {{ pin_compatible("nccl", max_pin="x") }}
 
