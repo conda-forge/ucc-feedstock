@@ -19,8 +19,6 @@ build:
     - '*libnvidia-ml.so*'
     - '*libnccl.so*'
   ignore_run_exports_from:
-    # CXX standard library is unused
-    - {{ compiler('cxx') }}
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
     - cuda-cudart-dev  # [cuda_compiler == "cuda-nvcc"]
