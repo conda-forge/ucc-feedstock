@@ -21,7 +21,7 @@ build:
   ignore_run_exports_from:
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
-    - cuda-cudart-dev  # [cuda_compiler == "cuda-nvcc"]
+    - cuda-cudart-dev
     - nccl
 
 requirements:
@@ -37,8 +37,8 @@ requirements:
   host:
     - ucx
     - cuda-version {{ cuda_compiler_version }}
-    - cuda-cudart-dev  # [cuda_compiler == "cuda-nvcc"]
-    - cuda-nvml-dev    # [cuda_compiler == "cuda-nvcc"]
+    - cuda-cudart-dev
+    - cuda-nvml-dev
     - nccl
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
@@ -47,7 +47,7 @@ requirements:
     # The actual version constraint comes from cuda-version, so below we explicit list
     # them only to codify that these are expected (but optional) dependencies when CUDA
     # is in use, otherwise the solver gets confused (conda-forge/ucc-feedstock#19).
-    - cuda-cudart                                               # [cuda_compiler == "cuda-nvcc"]
+    - cuda-cudart
     - {{ pin_compatible("nccl", max_pin="x") }}
 
 test:
