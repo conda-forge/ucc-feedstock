@@ -1,4 +1,4 @@
-{% set version = "1.5.0" %}
+{% set version = "1.5.1" %}
 
 package:
   name: ucc
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/openucx/ucc/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 7ab61a3215616ee9a7a6f51e61cfaac9e7055a12b233aef8d4a7218d2cb3860f
+  sha256: 7921424e4b6b756133497ab6fdfb8d038eea33f337d4c2dbce13f59e04d16e5b
 
 build:
   skip: true  # [(not linux) or cuda_compiler_version in (undefined, "None")]
