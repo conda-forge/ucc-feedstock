@@ -1,4 +1,4 @@
-{% set version = "1.4.4" %}
+{% set version = "1.6.0" %}
 
 package:
   name: ucc
@@ -6,14 +6,11 @@ package:
 
 source:
   url: https://github.com/openucx/ucc/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e098e427c7b72b5434ae1e0da2258ab3bc271142c136b0bf4cf40ef9948b70d0
+  sha256: c77897cdaec2114234504fd9259d5143a6933a8ee51aad52fbc4ad1c9752114d
 
 build:
-  skip: true  # [not linux]
-  skip: true  # [cuda_compiler_version not in ("11.8", "12.9")]
+  skip: true  # [(not linux) or cuda_compiler_version in (undefined, "None")]
   number: 1
-  ignore_run_exports_from:
-    - ucx
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
@@ -22,11 +19,10 @@ build:
     - '*libnvidia-ml.so*'
     - '*libnccl.so*'
   ignore_run_exports_from:
-    # CXX standard library is unused
-    - {{ compiler('cxx') }}
+    - ucx
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
-    - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-cudart-dev
     - nccl
 
 requirements:
@@ -36,14 +32,14 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
     - automake
+    - autoconf !=2.72  # work around conda-forge/autoconf-feedstock#41
     - libtool
     - make
   host:
     - ucx
     - cuda-version {{ cuda_compiler_version }}
-    - cudatoolkit      # [(cuda_compiler_version or "None").startswith("11")]
-    - cuda-cudart-dev  # [(cuda_compiler_version or "None").startswith("12")]
-    - cuda-nvml-dev    # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-cudart-dev
+    - cuda-nvml-dev
     - nccl
   run:
     - {{ pin_compatible("ucx", max_pin="x.x.x") }}
@@ -52,8 +48,7 @@ requirements:
     # The actual version constraint comes from cuda-version, so below we explicit list
     # them only to codify that these are expected (but optional) dependencies when CUDA
     # is in use, otherwise the solver gets confused (conda-forge/ucc-feedstock#19).
-    - cudatoolkit                                               # [cuda_compiler == "nvcc"]
-    - cuda-cudart                                               # [cuda_compiler == "cuda-nvcc"]
+    - cuda-cudart
     - {{ pin_compatible("nccl", max_pin="x") }}
 
 test:
@@ -93,5 +88,4 @@ extra:
   recipe-maintainers:
     - marcinz
     - m3vaz
-    - sandeepd-nv
     - leofang
