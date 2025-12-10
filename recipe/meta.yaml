@@ -10,7 +10,7 @@ source:
 
 build:
   skip: true  # [(not linux) or cuda_compiler_version in (undefined, "None")]
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
@@ -19,6 +19,7 @@ build:
     - '*libnvidia-ml.so*'
     - '*libnccl.so*'
   ignore_run_exports_from:
+    - ucx
     # allow CPU-only use cases (xref: conda-forge/ucx-split-feedstock#173)
     - {{ compiler("cuda") }}
     - cuda-cudart-dev
