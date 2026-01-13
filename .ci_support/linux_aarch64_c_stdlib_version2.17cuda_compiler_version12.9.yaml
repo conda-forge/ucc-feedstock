@@ -27,7 +27,7 @@ target_platform:
 ucc:
 - '1'
 ucx:
-- '1.19'
+- '1.20'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
