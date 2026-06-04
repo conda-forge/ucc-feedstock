@@ -37,6 +37,7 @@ requirements:
     - make
   host:
     - ucx
+    - rdma-core
     - cuda-version {{ cuda_compiler_version }}
     - cuda-cudart-dev
     - cuda-nvml-dev
@@ -70,6 +71,8 @@ test:
     - test -f $PREFIX/lib/ucc/libucc_cl_hier.so.1
     - test -f $PREFIX/lib/ucc/libucc_ec_cuda.so.1
     - test -f $PREFIX/lib/ucc/libucc_ec_cpu.so.1
+    - test -f $PREFIX/lib/ucc/libucc_sysinfo_cuda.so.1
+    - test -f $PREFIX/lib/ucc/libucc_sysinfo_ib.so.1
     - test -f $PREFIX/bin/.ucc-post-link.sh
 
 
