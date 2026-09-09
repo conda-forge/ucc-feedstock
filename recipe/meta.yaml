@@ -1,4 +1,4 @@
-{% set version = "1.8.0" %}
+{% set version = "1.9.0" %}
 
 package:
   name: ucc
@@ -6,11 +6,11 @@ package:
 
 source:
   url: https://github.com/openucx/ucc/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 1fc0b7c5d6e5592ae1efff13705ff5cee2e67eba67914c2c70039e6854310b67
+  sha256: 88f9d6049f80b7215cc21e2c1be04bab8bf5cc8aac39fa42d1927995b0f8fb4a
 
 build:
   skip: true  # [(not linux) or cuda_compiler_version in (undefined, "None")]
-  number: 2
+  number: 0
   run_exports:
     - {{ pin_subpackage("ucc") }}
   missing_dso_whitelist:
